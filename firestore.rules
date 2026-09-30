@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isStore() {
+      return request.auth != null
+          && request.auth.uid == 'rIaFe7m83VOllbxzMJNftWE93aj2';
+    }
+
+    match /usuarios/{uid} {
+      allow read: if isStore()
+                  || (request.auth != null && request.auth.uid == uid);
+
+      allow create, update, delete: if request.auth != null
+                                    && request.auth.uid == uid;
+
+      match /direcciones/{direccionId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == uid;
+      }
+
+      match /pedidos/{pedidoId} {
+        allow read: if isStore()
+                    || (request.auth != null && request.auth.uid == uid);
+
+        allow create: if request.auth != null
+                      && request.auth.uid == uid;
+
+        allow update: if isStore();
+      }
+
+      match /domiciliarios/{domiciliarioId} {
+        allow read, write: if isStore();
+      }
+
+      match /clientes/{clienteId} {
+        allow read, write: if isStore();
+      }
+    }
+
+    match /clientes/{clienteId} {
+      allow read: if isStore()
+                  || (request.auth != null && request.auth.uid == clienteId);
+
+      allow create, update: if request.auth != null
+                            && request.auth.uid == clienteId;
+
+      allow delete: if isStore()
+                    || (request.auth != null && request.auth.uid == clienteId);
+    }
+
+    match /resumenVentas/{fechaId} {
+      allow read, write: if isStore();
+    }
+
+    match /productos/{productoId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if isStore();
+    }
+
+    match /{path=**}/pedidos/{pedidoId} {
+      allow read: if isStore()
+                  || (
+                    request.auth != null
+                    && resource.data.uid == request.auth.uid
+                  );
+    }
+  }
+}
