@@ -1,17 +1,51 @@
-# tienda_app
+# Tienda Dona Luz
 
-A new Flutter project.
+Aplicacion para la gestion integral de una tienda de barrio.
 
-## Getting Started
+**Desarrollado por Gonxoft Desarrolladores**
 
-This project is a starting point for a Flutter application.
+## Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- Gestion de clientes
+- Catalogo y carrito de compras
+- Gestion de pedidos
+- Gestion de domiciliarios
+- Direcciones y ubicacion
+- Ventas y reportes
+- Firebase Authentication y Cloud Firestore
+- Seguimiento de pedidos
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tecnologias
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- Firebase Authentication
+- Cloud Firestore
+- Geolocator
+
+## Arquitectura
+
+`	ext
+lib/
+├── data/
+├── models/
+├── screens/
+├── services/
+├── firebase_options.dart
+└── main.dart
+`
+
+## Flujo general
+
+Cliente -> Catalogo -> Carrito -> Confirmacion -> Tienda -> Preparacion -> Domiciliario -> Entregado
+
+## Estado del proyecto
+
+Proyecto funcional desarrollado en Flutter y conectado con Firebase.
+
+## Ejecucion
+
+`ash
+flutter pub get
+flutter run
+`
